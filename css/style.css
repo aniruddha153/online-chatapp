@@ -1,0 +1,73 @@
+@font-face {
+	font-family: 'ProximaNovaRegular';
+	src: url('../fonts/ProximaNovaRegular.eot');
+	src: local('ProximaNovaRegular'), url('../fonts/ProximaNovaRegular.woff') format('woff'), url('../fonts/ProximaNovaRegular.ttf') format('truetype');
+}
+.font-proxima-regular {	font-family: 'ProximaNovaRegular' !important; }
+
+html { width: 100%; height: 100%; }
+body { width: 100%; height: 100%; font-family: 'ProximaNovaRegular'; background: #3A4856; /*background-color: #edeff0;*/ }
+
+::-webkit-scrollbar {
+    width: 0.4em;
+}
+ 
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: #55585a;
+}
+
+input, textarea { box-shadow: none !important; outline: none; }
+input:focus, textarea:focus { }
+
+.vertical-middle-parent { display: table; }
+.vertical-middle-parent .vertical-middle-element { display: table-cell; vertical-align: middle; }
+
+.app { margin: 30px auto; /*box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);*/ box-shadow: 0 0px 20px 0 rgba(0,0,0,0.3); background-color: #FFF; }
+
+.list-pane, .chat-pane { position: relative; min-height: 550px; padding: 0; }
+.list-pane { background-color: #242A31; color: #848586; }
+.list-pane .search-bar { padding: 10px; color: #D8D8D8; border-bottom: 1px solid rgba(57, 63, 69, 0.6); }
+.list-pane .search-bar input.form-control { border-radius: 16px; background: rgba(255,255,255,0.1); }
+.left-innericon-addon { position: relative; }
+.left-innericon-addon span { position: absolute; padding: 9px 10px; }
+.left-innericon-addon span.fa-search:before { content: "\f002"; }
+.left-innericon-addon input { padding-left: 30px; border: 0; color: #D8D8D8; }
+
+.list-pane .nav-tabs { border: 0; }
+.list-pane .nav-tabs > li { width: 50%; display: table; border-bottom: 2px solid transparent; }
+.list-pane .nav-tabs > li:not(.active):hover { background-color: rgba(57, 63, 69, 0.6); transition: 0.3s all ease-in-out; }
+/*.list-pane .nav-tabs > li.active > a::after { content: ' '; display: block; margin-top: 10px; height: 2px; border: 2px solid #578EC9; width: 100%; }*/
+.list-pane .nav-tabs > li.active { border-bottom: 2px solid #578EC9; transition: 0.3s all ease-in-out; }
+.list-pane .nav-tabs > li > a { display: table-cell; margin-right: 0; vertical-align: middle; text-align: center; border-radius: 0; border: none; background: transparent; color: #C3C3C3; }
+.list-pane .nav-tabs > li > a > i.fa { margin-right: 10px; }
+.list-pane .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border: none; background: transparent; color: #C3C3C3; }
+.list-pane .tab-content { height: 468px; overflow-y: auto; }
+.list-pane .media { padding: 10px; border-bottom: 1px solid rgba(57, 63, 69, 0.6); margin-top: 0; cursor: pointer; }
+.list-pane .media.active { background-color: #3E5162; }
+.list-pane .media img { height: 50px; width: 50px; border-radius: 50%; }
+.list-pane .media .media-body { vertical-align: middle; }
+.list-pane .media .media-body h4, .list-pane .media .media-body p { margin: 0; }
+.list-pane .media .media-body h4 { color: #C3C3C3; }
+
+.chat-pane {}
+.chat-pane .chat-window { padding: 10px; height: 452px; background: #EDEFF3; overflow-x: hidden; overflow-y: auto; }
+.chat-pane .chat-header { padding: 10px 20px; border-bottom: 2px solid #E0E0E0; }
+
+.chat-header img, .chat-header span { display: inline-block; }
+.chat-header img.user-avatar { width: 40px; height: 40px; border-radius: 50%; }
+.chat-header span.user-name { margin-left: 10px; font-size: 1.2em; }
+
+.chat-window .msg { position: relative; margin-bottom: 15px; }
+.chat-window .bubble { padding: 5px 10px; max-width: 70%; border-radius: 2px; box-shadow: 1px 1px 2px rgba(0,0,0,0.15); }
+.chat-window .bubble.msg-out { float: right; background: #578EC9; color: #FFF; }
+.chat-window .bubble.msg-in { float: left; background: #FFF; }
+
+.chat-pane .chat-footer { height: 50px; padding: 5px; position: relative; bottom: 0; width: 100%; border-top: 1px solid #E0E0E0; }
+.chat-footer span.input-group-addon { border: 0; border-radius: 0; background-color: transparent; color: #578EC9; }
+.chat-footer span.input-group-btn > .btn { margin-left: 0; background: transparent; outline: none; color: #578EC9; }
+.chat-footer span.input-group-btn > .btn:disabled { color: #6B6F75; }
+.chat-footer input { background: transparent; font-size: 1.1em; border: 0; }

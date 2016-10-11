@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="webChat">
+<head>
+	<title>WebChat</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+	<!--Custom CSS-->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+	<div class="container">
+		<div id="WebChatApp" class="row app" ng-controller="ChatController as chat">
+
+			<div class="col-xs-3 list-pane">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active" ng-click="chat.clearSearchField()"><a href="#chats" aria-controls="chats" role="tab" data-toggle="tab"><i class="fa fa-comments-o fa-lg"></i> Chats</a></li>
+					<li role="presentation" ng-click="chat.clearSearchField()"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab"><i class="fa fa-user fa-lg"></i> Contacts</a></li>
+				</ul>
+				<div class="search-bar">
+					<div class="left-innericon-addon">
+						<span class="fa fa-search"></span>
+						<input type="text" id="searchBar" class="form-control" placeholder="Search..." ng-model="searchQuery.name">
+					</div>
+				</div>
+
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="chats">
+						<div ng-repeat="user in users | filter: searchQuery" ng-show="user.messages.length">
+						<div class="media" ng-click="chat.openChat(user, $index)" ng-class="{ 'active': $index == selectedIndex }">
+							<div class="media-left media-middle">
+								<img class="media-object" ng-src="{{user.avatar}}" alt="{{user.name}}">
+							</div>
+							<div class="media-body">
+						    	<h4 class="media-heading">{{user.name}}</h4>
+						    	<p>{{user.status}}</p>
+							</div>
+						</div>
+						</div>
+					</div>
+
+					<div role="tabpanel" class="tab-pane" id="contacts">
+						<div ng-repeat="user in users | orderBy:'name' | filter: searchQuery">
+						<div class="media" ng-click="chat.openChat(user)">
+							<div class="media-left media-middle">
+								<img class="media-object" ng-src="{{user.avatar}}" alt="{{user.name}}">
+							</div>
+							<div class="media-body">
+						    	<h4 class="media-heading">{{user.name}}</h4>
+						    	<p>{{user.status}}</p>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-9 chat-pane">
+				<div ng-show="chat.selectedUser">
+				<header class="chat-header">
+					<img ng-src="{{chat.selectedUser.avatar}}" class="img-responsive user-avatar" alt="{{chat.selectedUser.name}}" />
+					<span class="user-name">{{chat.selectedUser.name}}</span>
+				</header>
+
+				<div id="output" class="chat-window">
+					<div class="clearfix msg" ng-repeat="message in chat.selectedUser.messages">
+						<div class="bubble {{message.seq}}">
+							{{message.text}}
+						</div>
+					</div>
+				</div>
+
+				<footer class="chat-footer">
+					<div class="input-group">
+						<input type="text" id="msgInput" name="msgInput" class="form-control" placeholder="Type a message" ng-model="new_message">
+						<span class="input-group-addon"><i class="fa fa-smile-o fa-lg"></i></span>
+						<span class="input-group-btn">
+							<button id="sendMsg" class="btn" type="button" ng-click="chat.updateChatHistory(chat.selectedUser, $index)" disabled><i class="fa fa-send fa-lg"></i></button>
+						</span>
+					</div>
+				</footer>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<!--Custom JS-->
+	<script type="text/javascript" src="js/users.js"></script>
+	<script src="js/angular-websocket.js"></script>
+	<script src="js/angular-indexed-db.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
