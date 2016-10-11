@@ -54,7 +54,7 @@
 
     this.updateChatHistory = function(user, $index){
       $scope.selectedIndex = $index;
-      var ws = $websocket('ws://echo.websocket.org/');
+      var ws = $websocket('wss://echo.websocket.org/');
       var new_message = $('#msgInput').val();
       if (!new_message) { return; }
 
