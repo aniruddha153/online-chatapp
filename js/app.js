@@ -35,9 +35,6 @@
   if(!localStorage.getItem('allUsers')){
     localStorage.setItem('allUsers', JSON.stringify(users));
   }
-  else {
-    localStorage.setItem('allUsers', localStorage.getItem('allUsers'));
-  }
 
   app.controller('ChatController', function($scope, $indexedDB, $websocket) {
     var allUsers = localStorage.getItem('allUsers');
@@ -57,7 +54,7 @@
 
     this.updateChatHistory = function(user, $index){
       $scope.selectedIndex = $index;
-      var ws = $websocket('wss://echo.websocket.org/');
+      var ws = $websocket('ws://echo.websocket.org/');
       var new_message = $('#msgInput').val();
       if (!new_message) { return; }
 
@@ -71,8 +68,7 @@
       
       ws.send(new_message);
       user.messages.push(outMsg);
-      users[user.id - 1].messages.push(outMsg);
-      localStorage.setItem('allUsers', JSON.stringify(users));
+      updateLocalStorage(outMsg, user.id);
 
       ws.onMessage(function(event) {
         var message = event.data;
@@ -82,12 +78,22 @@
         }
         ws.close();
         user.messages.push(inMsg);
-        users[user.id - 1].messages.push(inMsg);
-        localStorage.setItem('allUsers', JSON.stringify(users));
+        updateLocalStorage(inMsg, user.id);
       });
       
       $('#msgInput').val('');
     };
   });
+
+  function updateLocalStorage(msg, userid){
+    var allUsers = JSON.parse(localStorage.getItem('allUsers'));
+
+    $.each(allUsers, function(index, user) {
+      if(user.id === userid){
+        allUsers[index].messages.push(msg);        
+      }
+    });
+    localStorage.setItem('allUsers', JSON.stringify(allUsers));
+  }
   
 })();
